@@ -24,3 +24,4 @@ python-decouple==3.8
 Flask==3.0.3
 flask
 gunicorn==22.0.0
+--no-cache-dir
