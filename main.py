@@ -41,9 +41,9 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 
 # Bot credentials from environment variables (Render compatible)
-API_ID = int(os.environ.get("API_ID", 24473318))
-API_HASH = os.environ.get("API_HASH", "e7dd0576c5ac0ff8f90971d6bb04c8f5")
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "8034069514:AAHUBpzSCq41jPwsJkDbXuEoVC_yCxzyuw0")
+API_ID = int(os.environ.get("API_ID", ))
+API_HASH = os.environ.get("API_HASH", "")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
 
 # Initialize Bot Globally (IMPORTANT FIX)
 bot = Client("bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
@@ -113,7 +113,7 @@ async def fetch_pwwp_data(session: aiohttp.ClientSession, url: str, headers: Dic
             logging.exception(f"Attempt {attempt + 1} failed: Unexpected error fetching {url}: {e}")
 
         if attempt < max_retries - 1:
-            await asyncio.sleep(90 ** attempt)
+            await asyncio.sleep(3 ** attempt)
         else:
             logging.error(f"Failed to fetch {url} after {max_retries} attempts.")
             return None
