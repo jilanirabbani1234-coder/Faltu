@@ -134,12 +134,12 @@ async def process_pwwp_chapter_content(session: aiohttp.ClientSession, chapter_i
             if video_details:
                 name = data_item.get('topic', '')
                 videoUrl = video_details.get('videoUrl') or video_details.get('embedCode') or ""
-            #    image = video_details.get('image', "")
+                #image = video_details.get('image', "")
 
                 if videoUrl:
                     line = f"{name}:{videoUrl}"
                     content.append(line)
-               #     logging.info(line)
+                    #logging.info(line)
 
         elif content_type in ("notes", "DppNotes"):
             homework_ids = data_item.get('homeworkIds', [])
@@ -151,7 +151,7 @@ async def process_pwwp_chapter_content(session: aiohttp.ClientSession, chapter_i
                     if url:
                         line = f"{name}:{url}"
                         content.append(line)
-                    #    logging.info(line)
+                        #logging.info(line)
 
         return {content_type: content} if content else {}
     else:
@@ -296,7 +296,7 @@ async def get_pwwp_todays_schedule_content_details(session: aiohttp.ClientSessio
             if videoUrl:
                 line = f"{name}:{videoUrl}\n"
                 content.append(line)
-           #     logging.info(line)
+                #logging.info(line)
                
                           
         homework_ids = data_item.get('homeworkIds')
@@ -310,7 +310,7 @@ async def get_pwwp_todays_schedule_content_details(session: aiohttp.ClientSessio
                 if url:
                     line = f"{name}:{url}\n"
                     content.append(line)
-                #    logging.info(line)
+                    #logging.info(line)
                 
         dpp = data_item.get('dpp')
         if dpp:
@@ -325,7 +325,7 @@ async def get_pwwp_todays_schedule_content_details(session: aiohttp.ClientSessio
                     if url:
                         line = f"{name}:{url}\n"
                         content.append(line)
-                    #    logging.info(line)
+                        #logging.info(line)
     else:
         logging.warning(f"No Data Found For  Id - {schedule_id}")
     return content
