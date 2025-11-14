@@ -369,15 +369,15 @@ async def pwwp_callback(bot, callback_query):
         await bot.send_message(callback_query.message.chat.id, f"**You Are Not Subscribed To This Bot\nContact - {owner_username}**")
         return
             
-    await process_pwwp(bot, callback_query.message, user_id)
+    THREADPOOL.submit(asyncio.run, process_pwwp(bot, callback_query.message, user_id))
 
 async def process_pwwp(bot: Client, m: Message, user_id: int):
-    m.chat.ask = partial(m.chat.ask, timeout=120)
+    
 
     editable = await m.reply_text("**Enter Woking Access Token\n\nOR\n\nEnter Phone Number**")
 
     try:
-        input1 = await m.chat.ask("👉 Please enter your input:", timeout=120)
+        input1 = await m.chat.ask("👉 Please enter your input:", timeout=1200)
         raw_text1 = input1.text
         await input1.delete()
     except:
@@ -415,7 +415,7 @@ async def process_pwwp(bot: Client, m: Message, user_id: int):
 
                 editable = await editable.edit("**ENTER OTP YOU RECEIVED**")
                 try:
-                    input2 = await m.chat.ask("👉 Please enter your input:", timeout=120)
+                    input2 = await m.chat.ask("👉 Please enter your input:", timeout=1200)
                     otp = input2.text
                     await input2.delete()
                 except:
@@ -462,7 +462,7 @@ async def process_pwwp(bot: Client, m: Message, user_id: int):
         
             await editable.edit("**Enter Your Batch Name**")
             try:
-                input3 = await m.chat.ask("👉 Please enter your input:", timeout=120)
+                input3 = await m.chat.ask("👉 Please enter your input:", timeout=1200)
                 batch_search = input3.text
                 await input3.delete()
             except:
@@ -481,7 +481,7 @@ async def process_pwwp(bot: Client, m: Message, user_id: int):
                 await editable.edit(f"**Send index number of the course to download.\n\n{text}\n\nIf Your Batch Not Listed Above Enter - No**")
             
                 try:
-                    input4 = await m.chat.ask("👉 Please enter your input:", timeout=120)
+                    input4 = await m.chat.ask("👉 Please enter your input:", timeout=1200)
                     raw_text4 = input4.text
                     await input4.delete()
                 except:
@@ -507,7 +507,7 @@ async def process_pwwp(bot: Client, m: Message, user_id: int):
                         await editable.edit(f"**Send index number of the course to download.\n\n{text}**")
                 
                         try:
-                            input5 = await m.chat.ask("👉 Please enter your input:", timeout=120)
+                            input5 = await m.chat.ask("👉 Please enter your input:", timeout=1200)
                             raw_text5 = input5.text
                             await input5.delete()
                         except:
@@ -529,7 +529,7 @@ async def process_pwwp(bot: Client, m: Message, user_id: int):
                 await editable.edit("1.```\nFull Batch```\n2.```\nToday's Class```\n3.```\nKhazana```")
                     
                 try:
-                    input6 = await m.chat.ask("👉 Please enter your input:", timeout=120)
+                    input6 = await m.chat.ask("👉 Please enter your input:", timeout=1200)
                     raw_text6 = input6.text
                     await input6.delete()
                 except ListenerTimeout:
@@ -803,7 +803,7 @@ async def cpwp_callback(bot, callback_query):
         await bot.send_message(callback_query.message.chat.id, f"**You Are Not Subscribed To This Bot\nContact - {owner_username}**")
         return    
             
-    await process_pwwp(bot, callback_query.message, user_id)
+    THREADPOOL.submit(asyncio.run, process_pwwp(bot, callback_query.message, user_id))
     
 async def process_cpwp(bot: Client, m: Message, user_id: int):
     
@@ -827,11 +827,11 @@ async def process_cpwp(bot: Client, m: Message, user_id: int):
     CONNECTOR = aiohttp.TCPConnector(limit=1000, loop=loop)
     async with aiohttp.ClientSession(connector=CONNECTOR, loop=loop) as session:
         try:
-            m.chat.ask = partial(m.chat.ask, timeout=120)
+            
             editable = await m.reply_text("**Enter ORG Code Of Your Classplus App**")
             
             try:
-                input1 = await m.chat.ask("👉 Please enter your input:", timeout=120)
+                input1 = await m.chat.ask("👉 Please enter your input:", timeout=1200)
                 org_code = input1.text.lower()
                 await input1.delete()
             except ListenerTimeout:
@@ -883,7 +883,7 @@ async def process_cpwp(bot: Client, m: Message, user_id: int):
                                 await editable.edit(f"**Send index number of the Category Name\n\n{text}\nIf Your Batch Not Listed Then Enter Your Batch Name**")
                             
                                 try:
-                                    input2 = await m.chat.ask("👉 Please enter your input:", timeout=120)
+                                    input2 = await m.chat.ask("👉 Please enter your input:", timeout=1200)
                                     raw_text2 = input2.text
                                     await input2.delete()
                                 except ListenerTimeout:
@@ -922,7 +922,7 @@ async def process_cpwp(bot: Client, m: Message, user_id: int):
                                                 await editable.edit(f"**Send index number of the Batch to download.\n\n{text}**")
                                             
                                                 try:
-                                                    input3 = await m.chat.ask("👉 Please enter your input:", timeout=120)
+                                                    input3 = await m.chat.ask("👉 Please enter your input:", timeout=1200)
                                                     raw_text3 = input3.text
                                                     await input3.delete(True)
                                                 except ListenerTimeout:
@@ -1430,7 +1430,7 @@ async def appxwp_callback(bot, callback_query):
         await bot.send_message(callback_query.message.chat.id, f"**You Are Not Subscribed To This Bot\nContact - {owner_username}**")
         return
         
-    await process_pwwp(bot, callback_query.message, user_id)
+    THREADPOOL.submit(asyncio.run, process_pwwp(bot, callback_query.message, user_id))
 
 
 async def process_appxwp(bot: Client, m: Message, user_id: int):
@@ -1440,11 +1440,11 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
 
     async with aiohttp.ClientSession(connector=CONNECTOR, loop=loop) as session:
         try:
-            m.chat.ask = partial(m.chat.ask, timeout=120)
+            
             editable = await m.reply_text("**Enter App Name Or Api**")
 
             try:
-                input1 = await m.chat.ask("👉 Please enter your input:", timeout=120)
+                input1 = await m.chat.ask("👉 Please enter your input:", timeout=1200)
                 api = input1.text
                 await input1.delete()
             except:
@@ -1468,7 +1468,7 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
                     await editable.edit(f"**Send index number of the Batch to download.\n\n{text}**")
 
                     try:
-                        input2 = await m.chat.ask("👉 Please enter your input:", timeout=120)
+                        input2 = await m.chat.ask("👉 Please enter your input:", timeout=1200)
                         raw_text2 = input2.text
                         await input2.delete()
                     except:
@@ -1563,7 +1563,7 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
                 raise Exception("Did not found any course")
                 
             try:
-                input5 = await m.chat.ask("👉 Please enter your input:", timeout=120)
+                input5 = await m.chat.ask("👉 Please enter your input:", timeout=1200)
                 raw_text5 = input5.text
                 await input5.delete()
             except:
