@@ -369,7 +369,7 @@ async def pwwp_callback(bot, callback_query):
         await bot.send_message(callback_query.message.chat.id, f"**You Are Not Subscribed To This Bot\nContact - {owner_username}**")
         return
             
-    THREADPOOL.submit(asyncio.run, process_pwwp(bot, callback_query.message, user_id))
+    await process_pwwp(bot, callback_query.message, user_id)
 
 async def process_pwwp(bot: Client, m: Message, user_id: int):
     m.chat.ask = partial(m.chat.ask, timeout=120)
@@ -803,7 +803,7 @@ async def cpwp_callback(bot, callback_query):
         await bot.send_message(callback_query.message.chat.id, f"**You Are Not Subscribed To This Bot\nContact - {owner_username}**")
         return    
             
-    THREADPOOL.submit(asyncio.run, process_cpwp(bot, callback_query.message, user_id))
+    await process_pwwp(bot, callback_query.message, user_id)
     
 async def process_cpwp(bot: Client, m: Message, user_id: int):
     
@@ -1430,7 +1430,7 @@ async def appxwp_callback(bot, callback_query):
         await bot.send_message(callback_query.message.chat.id, f"**You Are Not Subscribed To This Bot\nContact - {owner_username}**")
         return
         
-    THREADPOOL.submit(asyncio.run, process_appxwp(bot, callback_query.message, user_id))
+    await process_pwwp(bot, callback_query.message, user_id)
 
 
 async def process_appxwp(bot: Client, m: Message, user_id: int):
