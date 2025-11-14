@@ -372,6 +372,7 @@ async def pwwp_callback(bot, callback_query):
     THREADPOOL.submit(asyncio.run, process_pwwp(bot, callback_query.message, user_id))
 
 async def process_pwwp(bot: Client, m: Message, user_id: int):
+    m.chat.ask = partial(m.chat.ask, timeout=120)
 
     editable = await m.reply_text("**Enter Woking Access Token\n\nOR\n\nEnter Phone Number**")
 
@@ -826,6 +827,7 @@ async def process_cpwp(bot: Client, m: Message, user_id: int):
     CONNECTOR = aiohttp.TCPConnector(limit=1000, loop=loop)
     async with aiohttp.ClientSession(connector=CONNECTOR, loop=loop) as session:
         try:
+            m.chat.ask = partial(m.chat.ask, timeout=120)
             editable = await m.reply_text("**Enter ORG Code Of Your Classplus App**")
             
             try:
@@ -1438,6 +1440,7 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
 
     async with aiohttp.ClientSession(connector=CONNECTOR, loop=loop) as session:
         try:
+            m.chat.ask = partial(m.chat.ask, timeout=120)
             editable = await m.reply_text("**Enter App Name Or Api**")
 
             try:
