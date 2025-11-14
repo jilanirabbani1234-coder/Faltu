@@ -1,5 +1,5 @@
-import asyncio
-asyncio.set_event_loop(asyncio.new_event_loop())
+from pyromod import listen
+from asyncio.exceptions import TimeoutError as ListenerTimeout
 import requests
 import asyncio
 import aiohttp
