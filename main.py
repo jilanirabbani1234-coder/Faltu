@@ -376,9 +376,9 @@ async def process_pwwp(bot: Client, m: Message, user_id: int):
     editable = await m.reply_text("**Enter Woking Access Token\n\nOR\n\nEnter Phone Number**")
 
     try:
-        input1 = await bot.listen(chat_id=m.chat.id, filters=filters.user(user_id), timeout=120)
+        input1 = await m.chat.ask("👉 Please enter your input:", timeout=120)
         raw_text1 = input1.text
-        await input1.delete(True)
+        await input1.delete()
     except:
         await editable.edit("**Timeout! You took too long to respond**")
         return
@@ -414,9 +414,9 @@ async def process_pwwp(bot: Client, m: Message, user_id: int):
 
                 editable = await editable.edit("**ENTER OTP YOU RECEIVED**")
                 try:
-                    input2 = await bot.listen(chat_id=m.chat.id, filters=filters.user(user_id), timeout=120)
+                    input2 = await m.chat.ask("👉 Please enter your input:", timeout=120)
                     otp = input2.text
-                    await input2.delete(True)
+                    await input2.delete()
                 except:
                     await editable.edit("**Timeout! You took too long to respond**")
                     return
@@ -461,9 +461,9 @@ async def process_pwwp(bot: Client, m: Message, user_id: int):
         
             await editable.edit("**Enter Your Batch Name**")
             try:
-                input3 = await bot.listen(chat_id=m.chat.id, filters=filters.user(user_id), timeout=120)
+                input3 = await m.chat.ask("👉 Please enter your input:", timeout=120)
                 batch_search = input3.text
-                await input3.delete(True)
+                await input3.delete()
             except:
                 await editable.edit("**Timeout! You took too long to respond**")
                 return
@@ -480,9 +480,9 @@ async def process_pwwp(bot: Client, m: Message, user_id: int):
                 await editable.edit(f"**Send index number of the course to download.\n\n{text}\n\nIf Your Batch Not Listed Above Enter - No**")
             
                 try:
-                    input4 = await bot.listen(chat_id=m.chat.id, filters=filters.user(user_id), timeout=120)
+                    input4 = await m.chat.ask("👉 Please enter your input:", timeout=120)
                     raw_text4 = input4.text
-                    await input4.delete(True)
+                    await input4.delete()
                 except:
                     await editable.edit("**Timeout! You took too long to respond**")
                     return
@@ -506,9 +506,9 @@ async def process_pwwp(bot: Client, m: Message, user_id: int):
                         await editable.edit(f"**Send index number of the course to download.\n\n{text}**")
                 
                         try:
-                            input5 = await bot.listen(chat_id=m.chat.id, filters=filters.user(user_id), timeout=120)
+                            input5 = await m.chat.ask("👉 Please enter your input:", timeout=120)
                             raw_text5 = input5.text
-                            await input5.delete(True)
+                            await input5.delete()
                         except:
                             await editable.edit("**Timeout! You took too long to respond**")
                             return
@@ -528,9 +528,9 @@ async def process_pwwp(bot: Client, m: Message, user_id: int):
                 await editable.edit("1.```\nFull Batch```\n2.```\nToday's Class```\n3.```\nKhazana```")
                     
                 try:
-                    input6 = await bot.listen(chat_id=m.chat.id, filters=filters.user(user_id), timeout=120)
+                    input6 = await m.chat.ask("👉 Please enter your input:", timeout=120)
                     raw_text6 = input6.text
-                    await input6.delete(True)
+                    await input6.delete()
                 except ListenerTimeout:
                     await editable.edit("**Timeout! You took too long to respond**")
                     return
@@ -829,9 +829,9 @@ async def process_cpwp(bot: Client, m: Message, user_id: int):
             editable = await m.reply_text("**Enter ORG Code Of Your Classplus App**")
             
             try:
-                input1 = await bot.listen(chat_id=m.chat.id, filters=filters.user(user_id), timeout=120)
+                input1 = await m.chat.ask("👉 Please enter your input:", timeout=120)
                 org_code = input1.text.lower()
-                await input1.delete(True)
+                await input1.delete()
             except ListenerTimeout:
                 await editable.edit("**Timeout! You took too long to respond**")
                 return
@@ -881,9 +881,9 @@ async def process_cpwp(bot: Client, m: Message, user_id: int):
                                 await editable.edit(f"**Send index number of the Category Name\n\n{text}\nIf Your Batch Not Listed Then Enter Your Batch Name**")
                             
                                 try:
-                                    input2 = await bot.listen(chat_id=m.chat.id, filters=filters.user(user_id), timeout=120)
+                                    input2 = await m.chat.ask("👉 Please enter your input:", timeout=120)
                                     raw_text2 = input2.text
-                                    await input2.delete(True)
+                                    await input2.delete()
                                 except ListenerTimeout:
                                     await editable.edit("**Timeout! You took too long to respond**")
                                     return
@@ -920,7 +920,7 @@ async def process_cpwp(bot: Client, m: Message, user_id: int):
                                                 await editable.edit(f"**Send index number of the Batch to download.\n\n{text}**")
                                             
                                                 try:
-                                                    input3 = await bot.listen(chat_id=m.chat.id, filters=filters.user(user_id), timeout=120)
+                                                    input3 = await m.chat.ask("👉 Please enter your input:", timeout=120)
                                                     raw_text3 = input3.text
                                                     await input3.delete(True)
                                                 except ListenerTimeout:
@@ -1441,9 +1441,9 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
             editable = await m.reply_text("**Enter App Name Or Api**")
 
             try:
-                input1 = await bot.listen(chat_id=m.chat.id, filters=filters.user(user_id), timeout=120)
+                input1 = await m.chat.ask("👉 Please enter your input:", timeout=120)
                 api = input1.text
-                await input1.delete(True)
+                await input1.delete()
             except:
                 await editable.edit("**Timeout! You took too long to respond**")
                 return
@@ -1465,9 +1465,9 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
                     await editable.edit(f"**Send index number of the Batch to download.\n\n{text}**")
 
                     try:
-                        input2 = await bot.listen(chat_id=m.chat.id, filters=filters.user(user_id), timeout=120)
+                        input2 = await m.chat.ask("👉 Please enter your input:", timeout=120)
                         raw_text2 = input2.text
-                        await input2.delete(True)
+                        await input2.delete()
                     except:
                         await editable.edit("**Timeout! You took too long to respond**")
                         return
@@ -1560,9 +1560,9 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
                 raise Exception("Did not found any course")
                 
             try:
-                input5 = await bot.listen(chat_id=m.chat.id, filters=filters.user(user_id), timeout=120)
+                input5 = await m.chat.ask("👉 Please enter your input:", timeout=120)
                 raw_text5 = input5.text
-                await input5.delete(True)
+                await input5.delete()
             except:
                 await editable.edit("**Timeout! You took too long to respond**")
                 return
