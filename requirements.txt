@@ -1,8 +1,7 @@
-pyrogram==1.4.16
-PyWinCtl==0.3
+pyrogram==2.0.106
 tgcrypto
+pyromod==1.5.0
 requests
-git+https://github.com/pyromod/pyromod
 ffmpeg
 mediainfo
 cloudscraper
@@ -16,11 +15,8 @@ PySocks==1.7.1
 websockets==12.0
 psutil
 async-lru==2.0.4
-helper
 pyaes==1.6.1
 soupsieve==2.5
-py-tgcalls==1.2.9
 python-decouple==3.8
 Flask==3.0.3
-flask
 gunicorn==22.0.0
