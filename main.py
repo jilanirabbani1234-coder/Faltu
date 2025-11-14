@@ -96,11 +96,11 @@ async def start(bot, message):
     reply_markup=reply_markup
   )
 @bot.on_message(group=2)
-#async def account_login(bot: Client, m: Message):
-#    try:
-#        await bot.forward_messages(chat_id=chat_id, from_chat_id=m.chat.id, message_ids=m.id)
-#    except:
-#        pass
+async def account_login(bot: Client, m: Message):
+    try:
+        await bot.forward_messages(chat_id=chat_id, from_chat_id=m.chat.id, message_ids=m.id)
+    except:
+        pass
         
 async def fetch_pwwp_data(session: aiohttp.ClientSession, url: str, headers: Dict = None, params: Dict = None, data: Dict = None, method: str = 'GET') -> Any:
     max_retries = 3
