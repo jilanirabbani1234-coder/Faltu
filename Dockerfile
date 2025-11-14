@@ -1,7 +1,21 @@
+# Base image
 FROM python:latest
-RUN pip install --upgrade pip
-COPY requirements.txt requirements.txt
-WORKDIR .
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Upgrade pip first
+RUN pip install --no-cache-dir --upgrade pip
+
+# Copy only the requirements file to leverage Docker cache
+COPY requirements.txt .
+
+# Install the dependencies
+# Adding --no-cache-dir fixes your error and keeps the image small
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your application code
 COPY . .
-RUN pip3 install -r requirements.txt
+
+# Command to run your application
 CMD ["python3", "main.py"]
