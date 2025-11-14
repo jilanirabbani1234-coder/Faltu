@@ -4,6 +4,7 @@ import requests
 import asyncio
 import aiohttp
 import json
+from functools import partial
 import zipfile
 from typing import Dict, List, Any, Tuple
 from collections import defaultdict
