@@ -2,7 +2,7 @@ pyrogram==2.0.106
 PyWinCtl==0.3
 tgcrypto
 requests
-pyromod
+pyromod==1.6
 ffmpeg
 mediainfo
 cloudscraper
