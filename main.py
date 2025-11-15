@@ -135,12 +135,12 @@ async def process_pwwp_chapter_content(session: aiohttp.ClientSession, chapter_i
             if video_details:
                 name = data_item.get('topic', '')
                 videoUrl = video_details.get('videoUrl') or video_details.get('embedCode') or ""
-                #image = video_details.get('image', "")
+                image = video_details.get('image', "")
 
                 if videoUrl:
                     line = f"{name}:{videoUrl}"
                     content.append(line)
-                    #logging.info(line)
+                    logging.info(line)
 
         elif content_type in ("notes", "DppNotes"):
             homework_ids = data_item.get('homeworkIds', [])
@@ -152,7 +152,7 @@ async def process_pwwp_chapter_content(session: aiohttp.ClientSession, chapter_i
                     if url:
                         line = f"{name}:{url}"
                         content.append(line)
-                        #logging.info(line)
+                        logging.info(line)
 
         return {content_type: content} if content else {}
     else:
@@ -297,7 +297,7 @@ async def get_pwwp_todays_schedule_content_details(session: aiohttp.ClientSessio
             if videoUrl:
                 line = f"{name}:{videoUrl}\n"
                 content.append(line)
-                #logging.info(line)
+                logging.info(line)
                
                           
         homework_ids = data_item.get('homeworkIds')
@@ -311,7 +311,7 @@ async def get_pwwp_todays_schedule_content_details(session: aiohttp.ClientSessio
                 if url:
                     line = f"{name}:{url}\n"
                     content.append(line)
-                    #logging.info(line)
+                    logging.info(line)
                 
         dpp = data_item.get('dpp')
         if dpp:
@@ -326,7 +326,7 @@ async def get_pwwp_todays_schedule_content_details(session: aiohttp.ClientSessio
                     if url:
                         line = f"{name}:{url}\n"
                         content.append(line)
-                        #logging.info(line)
+                        logging.info(line)
     else:
         logging.warning(f"No Data Found For  Id - {schedule_id}")
     return content
@@ -651,7 +651,7 @@ async def fetch_cpwp_signed_url(url_val: str, name: str, session: aiohttp.Client
                 return signed_url
                 
         except Exception as e:
-         #   logging.exception(f"Unexpected error fetching signed URL for {name}: {e}. Attempt {attempt + 1}/{MAX_RETRIES}")
+            logging.exception(f"Unexpected error fetching signed URL for {name}: {e}. Attempt {attempt + 1}/{MAX_RETRIES}")
             pass
 
         if attempt < MAX_RETRIES - 1:
@@ -668,16 +668,16 @@ async def process_cpwp_url(url_val: str, name: str, session: aiohttp.ClientSessi
             return None
 
         if "testbook.com" in url_val or "classplusapp.com/drm" in url_val or "media-cdn.classplusapp.com/drm" in url_val:
-        #    logging.info(f"{name}:{url_val}")
+            logging.info(f"{name}:{url_val}")
             return f"{name}:{url_val}\n"
 
         async with session.get(signed_url) as response:
             response.raise_for_status()
-       #     logging.info(f"{name}:{url_val}")
+            logging.info(f"{name}:{url_val}")
             return f"{name}:{url_val}\n"
             
     except Exception as e:
-    #    logging.exception(f"Unexpected error processing {name}: {e}")
+        logging.exception(f"Unexpected error processing {name}: {e}")
         pass
     return None
 
@@ -748,7 +748,7 @@ async def get_cpwp_course_content(session: aiohttp.ClientSession, headers: Dict[
                         url_val: str | None = content.get('url')
                         if url_val:
                             fetched_urls.add(url_val)
-                        #    logging.info(f"{name}:{url_val}")
+                            logging.info(f"{name}:{url_val}")
                             results.append(f"{name}:{url_val}\n")
                             if url_val.endswith('.pdf'):
                                 pdf_count += 1
@@ -781,7 +781,7 @@ async def get_cpwp_course_content(session: aiohttp.ClientSession, headers: Dict[
             if nested_results:
                 results.extend(nested_results)
             else:
-            #    logging.warning(f"get_cpwp_course_content returned None for folder_id {folder_id}")
+                logging.warning(f"get_cpwp_course_content returned None for folder_id {folder_id}")
                 pass
             video_count += nested_video_count
             pdf_count += nested_pdf_count
@@ -1500,8 +1500,8 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
                 'Accept-Encoding': "gzip",
                 'client-service': "Appx",
                 'auth-key': "appxapi",
-         #       'user-id': userid,
-         #       'authorization': token,
+                'user-id': userid,
+                'authorization': token,
                 'user_app_category': "",
                 'language': "en",
                 'device_type': "ANDROID"
