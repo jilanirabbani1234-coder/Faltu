@@ -739,7 +739,7 @@ async def get_cpwp_course_content(session: aiohttp.ClientSession, headers: Dict[
 
                     if url_val.endswith(("master.m3u8", "playlist.m3u8")) and url_val not in fetched_urls:
                         fetched_urls.add(url_val)
-                        headers2 = { 'x-access-token': 'eyJjb3Vyc2VJZCI6IjQ1NjY4NyIsInR1dG9ySWQiOm51bGwsIm9yZ0lkIjo0ODA2MTksImNhdGVnb3J5SWQiOm51bGx9'}
+                        headers2 = { 'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MzY3NjIxOTMsIm9yZ0lkIjoyODU4NzgsInR5cGUiOjEsIm1vYmlsZSI6IjkxODQ2OTYwMzQ1MiIsIm5hbWUiOiJTaGl2YW0gRHViZXkiLCJlbWFpbCI6bnVsbCwiaXNJbnRlcm5hdGlvbmFsIjowLCJkZWZhdWx0TGFuZ3VhZ2UiOiJlbiIsImNvdW50cnlDb2RlIjoiSU4iLCJjb3VudHJ5SVNPIjoiOTEiLCJ0aW1lem9uZSI6IkdNVCs1OjMwIiwiaXNEaXkiOmZhbHNlLCJpYXQiOjE2NTc4MTU1NjQsImV4cCI6MTY1ODQyMDM2NH0.BdSaVw3gsgf3UGcIv5OdwrD_WgzD8IYN9lIvJzfAmaYMlowlRhr7q_6IiUUhWNCw'}
                         task = asyncio.create_task(process_cpwp_url(url_val, name, session, headers2))
                         content_tasks.append((content['id'], task))
                         
