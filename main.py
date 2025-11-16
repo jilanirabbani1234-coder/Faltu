@@ -142,7 +142,7 @@ async def process_pwwp_chapter_content(session: aiohttp.ClientSession, chapter_i
 
                 if vid:
                     api_url = 
-                f"https://api.penpencil.co/v1/videos/{vid}/signed-url"
+                    f"https://api.penpencil.co/v1/videos/{vid}/signed-url"
                     signed_data = await fetch_pwwp_data(session, api_url, headers=headers)
 
                     if signed_data and signed_data.get("success"):
