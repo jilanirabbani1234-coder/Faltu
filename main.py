@@ -129,12 +129,23 @@ async def process_pwwp_chapter_content(session: aiohttp.ClientSession, chapter_i
 
     if data and data.get("success") and data.get("data"):
         data_item = data["data"]
+        print("\n\n==========DEBUG JSON==========")
+        print(json.dumps(data_item, indent=2)[:4000])
+        print("==========DEBUG END==========\n\n")
 
         if content_type in ("videos", "DppVideos"):
             video_details = data_item.get('videoDetails', {})
             if video_details:
                 name = data_item.get('topic', '')
-                videoUrl = video_details.get('videoUrl') or video_details.get('embedCode') or ""
+                videoUrl = (
+                    video_details.get('videoUrl')
+                    or video_details.get('embedCode')
+                    or video_details.get('url')
+                    or video_details.get('signedUrl')
+                    or video_details.get('temporaryUrl')
+                    or video_details.get('jwUrl')
+                    or ""
+                )
                 image = video_details.get('image', "")
 
                 if videoUrl:
