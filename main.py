@@ -137,15 +137,16 @@ async def process_pwwp_chapter_content(session: aiohttp.ClientSession, chapter_i
             video_details = data_item.get('videoDetails', {})
             if video_details:
                 name = data_item.get('topic', '')
-                videoUrl = (
-                    video_details.get('videoUrl')
-                    or video_details.get('embedCode')
-                    or video_details.get('url')
-                    or video_details.get('signedUrl')
-                    or video_details.get('temporaryUrl')
-                    or video_details.get('jwUrl')
-                    or ""
-                )
+                vid = video_details.get("id") or video_details.get("_id") 
+                videoUrl = ""
+
+                if vid:
+                    api_url = 
+                f"https://api.penpencil.co/v1/videos/{vid}/signed-url"
+                    signed_data = await fetch_pwwp_data(session, api_url, headers=headers)
+
+                    if signed_data and signed_data.get("success"):
+                        videoUrl = signed_data["data"].get("url", "")
                 image = video_details.get('image', "")
 
                 if videoUrl:
